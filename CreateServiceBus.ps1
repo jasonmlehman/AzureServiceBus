@@ -4,7 +4,8 @@ param(
   [Parameter(Mandatory = $true)] [string]$Queues # Multiple queues separated by comma
 )
 New-AzServiceBusNamespace -ResourceGroupName $ResourceGroup -Name $NameSpace -Location eastus
-Foreach ($Queue in $Queues) {
+$QueueArray = $Queues.Split(",")
+Foreach ($Queue in $QueueArray) {
 	New-AzServiceBusQueue -ResourceGroupName $ResourceGroup -NamespaceName $NameSpace -Name $Queue
 }
 
